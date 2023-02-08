@@ -1,11 +1,15 @@
-import Connection from "./Connection";
-import Interface from "./Interface";
+import Connection from "./pages/Connection";
+import Interface from "./pages/Interface";
+
+import Terminal from "./Terminal";
 
 
 
 export {
     Connection,
     Interface,
+
+    Terminal,
     
 
 }
