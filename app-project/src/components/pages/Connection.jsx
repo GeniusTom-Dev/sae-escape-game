@@ -30,9 +30,9 @@ function Connection() {
         <div className='absolute top-0 left-1/2 -translate-x-1/2'>{timestamp}</div>
 
         <div className='absolute right-4 top-2 w-16 flex justify-between items-center'>
-          <img src="./src/assets/wifi.svg" alt="battery" className='w-4'/>
-          <img src="./src/assets/volume.svg" alt="battery" className='w-4'/>
-          <img src="./src/assets/battery.svg" alt="battery" className='w-4 -rotate-90'/>
+          <img src="./src/assets/icons/wifi.svg" alt="battery" className='w-4'/>
+          <img src="./src/assets/icons/volume.svg" alt="battery" className='w-4'/>
+          <img src="./src/assets/icons/battery.svg" alt="battery" className='w-4 -rotate-90'/>
         </div>
 
         <div className='w-60 h-96 flex flex-col justify-center items-center'>

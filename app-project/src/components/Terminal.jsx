@@ -4,7 +4,7 @@ import { UserContext } from '../context/userContext'
 
 function Terminal() {
 
-    const {username,closeWindow,actionCommand,showData} = useContext(UserContext)
+    const {username,closeWindow,actionCommand,showData,currentFolder} = useContext(UserContext)
     const inputs = useRef([])
 
     const addInput = (el) => {
@@ -13,10 +13,16 @@ function Terminal() {
         }
     }
 
+    const updateScroll = () => {
+        var terminalScreen = document.getElementById("screen");
+        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+    }
+
     const keyDown = async (e) => {
         if(e.key == "Enter"){
             actionCommand(e.target.value)
             inputs.current[0].value = ""
+            setTimeout(updateScroll,1);
         }
     }
 
@@ -31,15 +37,15 @@ function Terminal() {
             <div className='w-16 absolute right-2 flex flex-row justify-around top-1/2 -translate-y-1/2 cursor-pointer' onClick={closeWindow}>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/minus.svg" alt="minus" className='w-2'/>
+                    <img src="./src/assets/icons/minus.svg" alt="minus" className='w-2'/>
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/square.svg" alt="square" className='w-2'/>
+                    <img src="./src/assets/icons/square.svg" alt="square" className='w-2'/>
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/cross.svg" alt="cross" className='w-2'/>
+                    <img src="./src/assets/icons/cross.svg" alt="cross" className='w-2'/>
                 </div>
             </div>
         </div>
@@ -50,7 +56,7 @@ function Terminal() {
             {showData && showData.map((nav,i) => (
                 <div key={i}>
                     <div className='mt-8 flex'>
-                            <h1 className='text-[#26a269]'>{username}:~$</h1>
+                            <h1 className='text-[#26a269]'>{username}:{nav.currentFolder}$</h1>
                         <p className='ml-4'>{nav.command}</p>
                     </div>
 
@@ -63,7 +69,7 @@ function Terminal() {
             ))}
 
             <div className='mt-8 flex'>
-                <h1 className='text-[#26a269]'>{username}:~$</h1>
+                <h1 className='text-[#26a269]'>{username}:{currentFolder}$</h1>
                 <input autoFocus type="text" spellCheck={false} className='bg-transparent outline-none ml-4 w-full' ref={addInput} onKeyDown={keyDown}/>
             </div>
         </div>
