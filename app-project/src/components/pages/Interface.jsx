@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { UserContext } from "../../context/userContext"
 import FileExplorer from "../FileExplorer"
 import Terminal from "../Terminal"
+import Fingerprint from "../Fingerprint"
 
 function Interface() {
 
@@ -48,6 +49,7 @@ function Interface() {
 
         {showedApp == "terminal" && <Terminal/>}
         {showedApp == "fileexplorer" && <FileExplorer/>}
+        {showedApp == "fingerprint" && <Fingerprint/>}
 
         
     </div>

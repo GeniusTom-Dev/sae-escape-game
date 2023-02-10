@@ -15,7 +15,7 @@ export const commands = [
     },
     
     {
-        command: "chmod -R 777 instructions.sh",
+        command: "chmod 777 instructions.txt",
         returnText: 
         <div>
             <p>Fichier Dévérouiller</p>
@@ -28,6 +28,19 @@ export const commands = [
         returnText: 
         <div className="flex">
             <p>Documents</p>
+            <p className="ml-4">Image</p>
+            <p className="ml-4">Musique</p>
+            <p className="ml-4">Téléchargements</p>
+            <p className="ml-4">Vidéo</p>
+        </div>
+
+    },
+
+    {
+        command: "cat instructions.txt",
+        returnText: 
+        <div>
+            <p></p>
             <p className="ml-4">Image</p>
             <p className="ml-4">Musique</p>
             <p className="ml-4">Téléchargements</p>

@@ -5,6 +5,9 @@ function FileExplorer() {
 
     const [showErrorMessage, setShowErrorMessage] = useState(false)
     const [showTerminalMessage, setShowTerminalMessage] = useState(false)
+    const [openedFolder, setOpenedFolder] = useState("personalFolder")
+    const [currentFolderName, setCurrentFolderName] = useState("Dossier Personel")
+    const [currentFolderImage, setCurrentFolderImage] = useState("house")
     const { closeWindow,lockInstructionFile } = useContext(UserContext)
 
     const tryOpenFile = () => {
@@ -24,14 +27,78 @@ function FileExplorer() {
         closeWindow()
     }
 
+    const setBarInfo = (info) => {
+        
+        if(info == "personalFolder"){
+            setCurrentFolderName("Dossier Personnel")
+            setCurrentFolderImage("house")
+
+        }else if(info == "documentsFolder"){  
+            setCurrentFolderName("Documents")
+            setCurrentFolderImage("file-lines")
+
+        }else if(info == "imageFolder"){            
+            setCurrentFolderName("Images")
+            setCurrentFolderImage("image")
+
+        }else if(info == "musicFolder"){            
+            setCurrentFolderName("Musiques")
+            setCurrentFolderImage("music")
+        }else if(info == "downloadFolder"){            
+            setCurrentFolderName("Téléchargements")
+            setCurrentFolderImage("download")
+        
+        }else if(info == "videoFolder"){
+            setCurrentFolderName("Vidéos")
+            setCurrentFolderImage("film")
+
+        }else if(info == "trashFolder"){            
+            setCurrentFolderName("Corbeille")
+            setCurrentFolderImage("trash-can")
+        }else if(info == "games"){            
+            setCurrentFolderName("Documents\u005CGames")
+            setCurrentFolderImage("gamepad")
+            console.log("cououc")
+        }
+    }
+
+    const catClick = (e) => {
+        if(e.target.dataset.catname){
+            setOpenedFolder(e.target.dataset.catname)
+            setBarInfo(e.target.dataset.catname)            
+        }else{
+            setOpenedFolder(e.target.parentElement.dataset.catname)
+            setBarInfo(e.target.parentElement.dataset.catname)
+        }
+    }
+
+    const onpenGameFolder = (e) => {
+        setOpenedFolder(e.target.parentElement.dataset.catname)
+        setBarInfo(e.target.parentElement.dataset.catname)
+    }
+
+    const backFolder = () => {
+        if(openedFolder === "games"){
+            setOpenedFolder("documentsFolder")
+            setBarInfo("documentsFolder")
+        }
+
+        const link = ["documentsFolder", "imageFolder", "musicFolder", "downloadFolder", "videoFolder"]
+        let search = link.find(element => element == openedFolder)
+        if(search){
+            setOpenedFolder("personalFolder")
+            setBarInfo("personalFolder")
+        }
+    }
+
   return (
     <div className='w-2/3 h-2/3 bg-[#252525] relative rounded-lg flex'>
         {/* Navbar */}
         <div className='bg-[#181818] w-full h-8 absolute rounded-t-lg'>
             <div className='w-16 absolute left-0 flex flex-row justify-center top-1/2 -translate-y-1/2 cursor-pointer' >
 
-                <div className='w-4 h-4 bg-[#373737] rounded-l-sm flex justify-center items-center'>
-                    <img src="./src/assets/icons/angle-left.svg" alt="angle-left" className='w-2'/>
+                <div className='w-4 h-4 bg-[#373737] rounded-l-sm flex justify-center items-center' onClick={backFolder}>
+                    <img src="./src/assets/icons/angle-left.svg" alt="angle-left" className='w-2' />
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-r-sm flex justify-center items-center ml-2'>
@@ -40,8 +107,8 @@ function FileExplorer() {
             </div>
 
             <div className='bg-[#242424] w-1/2 h-2/3 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rounded-sm flex items-center'>
-                <img src="./src/assets/icons/house.svg" alt="house" className="w-4 h-4 ml-2"/>
-                <h1 className="ml-4">Dossier Personnel</h1>
+                <img src={`./src/assets/icons/${currentFolderImage}.svg`} alt={currentFolderImage} className="w-4 h-4 ml-2"/>
+                <h1 className="ml-4">{currentFolderName}</h1>
             </div>
 
             <div className='w-16 absolute right-2 flex flex-row justify-around top-1/2 -translate-y-1/2 cursor-pointer' >
@@ -64,37 +131,37 @@ function FileExplorer() {
         {/* Left Menu */}
 
         <div className="bg-[#1b1b1b] h-full w-1/5 rounded-l-lg pt-10">
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center cursor-pointer" data-catname={"personalFolder"} onClick={catClick} >
                 <img src="./src/assets/icons/house.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Dossier Personnel</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4">
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"documentsFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/file-lines.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Documents</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4">
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"imageFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/image.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Image</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4">
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"musicFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/music.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Musique</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4">
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"downloadFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/download.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Téléchargements</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4">
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"videoFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/film.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Vidéo</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4">
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"trashFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/trash-can.svg" alt="house" className="w-4 h-4 ml-2"/>
                 <h1 className="text-sm ml-2">Corbeille</h1>
             </div>
@@ -105,11 +172,61 @@ function FileExplorer() {
 
         {/* Main content */}
 
-        <div className="w-4/5 h-full rounded-r-lg pl-6 pt-12 flex">
-            <div className="flex flex-col items-center cursor-pointer" onClick={tryOpenFile}>
-                <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
-                <h1>instructions.sh</h1>
-            </div>
+        <div className="w-4/5 h-full rounded-r-lg pt-12 flex">
+            {openedFolder == "personalFolder" && 
+                <div className="w-full">
+                    <div className="w-full flex">
+                        <div className="flex flex-col items-center cursor-pointer ml-5 " data-catname={"documentsFolder"} onClick={catClick} >
+                            <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
+                            <h1>Documents</h1>
+                        </div>
+
+                        <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"imageFolder"} onClick={catClick} >
+                            <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
+                            <h1>Images</h1>
+                        </div>
+
+                        <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"musicFolder"} onClick={catClick} >
+                            <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
+                            <h1>Musiques</h1>
+                        </div>
+
+                        <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"downloadFolder"} onClick={catClick} >
+                            <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
+                            <h1>Téléchargement</h1>
+                        </div>
+
+                        <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={catClick} >
+                            <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
+                            <h1>Vidéo</h1>
+                        </div>
+                    </div>
+                </div>
+            
+            }
+
+            {openedFolder == "documentsFolder" && <div className="flex flex-row cursor-pointer ml-5">
+                <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"games"} onClick={onpenGameFolder}>
+                    <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
+                    <h1>Games</h1>
+                </div>
+
+                <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFile}>
+                    <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
+                    <h1>instructions.txt</h1>
+                </div>
+                
+                
+            </div>}
+
+            {openedFolder == "games" &&
+                <div className="flex flex-row cursor-pointer ml-5">
+                    <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFile}>
+                        <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
+                        <h1>fingerprint.sh</h1>
+                    </div>   
+                </div>
+            }
 
         </div>
 
