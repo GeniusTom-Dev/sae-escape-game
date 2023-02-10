@@ -21,8 +21,10 @@ function Terminal() {
     const keyDown = async (e) => {
         if(e.key == "Enter"){
             actionCommand(e.target.value)
+            if(e.target.value.substr(0,2) != "./"){
+                setTimeout(updateScroll,1);
+            }
             inputs.current[0].value = ""
-            setTimeout(updateScroll,1);
         }
     }
 

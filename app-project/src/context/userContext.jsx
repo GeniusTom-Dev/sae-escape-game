@@ -6,11 +6,11 @@ export const UserContext = createContext()
 export function UserContextProvider(props){
 
     const [username, setUsername] = useState("Genius")
-    const [currentFolder, setCurrentFolder] = useState("~/Documents/Games")
+    const [currentFolder, setCurrentFolder] = useState("~/Documents/Enigmes")
 
     const [modalState, setModalState] = useState(false)
 
-    const [showedApp, setShowedApp] = useState(false)
+    const [showedApp, setShowedApp] = useState("fingerprint")
 
     const [lockInstructionFile, setLockInstructionFile] = useState(true)
 
@@ -48,8 +48,8 @@ export function UserContextProvider(props){
         if(currentFolder == "~"){
             addInfo(command)
         }else if(currentFolder == "~/Documents"){
-            addInfo(command, <div className="flex"><p>Games</p><p className="ml-4">instructions.txt</p></div>)
-        }else if(currentFolder == "~/Documents/Games"){
+            addInfo(command, <div className="flex"><p>Enigmes</p><p className="ml-4">instructions.txt</p></div>)
+        }else if(currentFolder == "~/Documents/Enigmes"){
             addInfo(command, <div className="flex"><p>fingerprint.sh</p></div>)
         }else{
             addInfo(command, <div><p>Aucun fichiers trouvés</p></div>)
@@ -67,12 +67,24 @@ export function UserContextProvider(props){
     }
 
     const commandCd = (command) => {
+        const link = ["Documents", "Image", "Musique", "Téléchargements", "Vidéo"]
         if(command == "cd"){
             setCurrentFolder(`~`)
             addInfo(command, <div></div>)
             return
-        }else if(currentFolder == "~"){
-            const link = ["Documents", "Image", "Musique", "Téléchargements", "Vidéo"]
+        }else if(command.split(' ')[1] == ".."){
+            if(currentFolder == "~/Documents/Enigmes"){
+                setCurrentFolder(`~/Documents`)
+                return
+            }else if(currentFolder == "~"){
+                addInfo(command, <div><p>Folder not found</p></div>)
+                return
+            }else{
+                setCurrentFolder(`~`)
+                return
+            }
+        }      
+        else if(currentFolder == "~"){
             let search = link.find(element => element == command.split(' ')[1])
             if(search){
                 setCurrentFolder(`~/${search}`)
@@ -81,15 +93,8 @@ export function UserContextProvider(props){
                 addInfo(command, <div><p>Folder not found</p></div>)
             }
         }else if(currentFolder == "~/Documents"){
-            if(command.split(' ')[1] == "Games"){
-                setCurrentFolder(`~/Documents/Games`)
-                return
-            }else{
-                addInfo(command, <div><p>Folder not found</p></div>)
-            }
-        }else if(currentFolder == "~/Documents/Games"){
-            if(command.split(' ')[1] == ".."){
-                setCurrentFolder(`~/Documents`)
+            if(command.split(' ')[1] == "Enigmes"){
+                setCurrentFolder(`~/Documents/Enigmes`)
                 return
             }else{
                 addInfo(command, <div><p>Folder not found</p></div>)
@@ -107,7 +112,7 @@ export function UserContextProvider(props){
     }
 
     const startFile = (command) => {
-        if(currentFolder == "~/Documents/Games"){
+        if(currentFolder == "~/Documents/Enigmes"){
             if(command == "./fingerprint.sh"){
                 setShowedApp("fingerprint")
             }

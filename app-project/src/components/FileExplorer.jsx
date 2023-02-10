@@ -55,8 +55,8 @@ function FileExplorer() {
         }else if(info == "trashFolder"){            
             setCurrentFolderName("Corbeille")
             setCurrentFolderImage("trash-can")
-        }else if(info == "games"){            
-            setCurrentFolderName("Documents\u005CGames")
+        }else if(info == "enigmes"){            
+            setCurrentFolderName("Documents\u005CEnigmes")
             setCurrentFolderImage("gamepad")
             console.log("cououc")
         }
@@ -78,7 +78,7 @@ function FileExplorer() {
     }
 
     const backFolder = () => {
-        if(openedFolder === "games"){
+        if(openedFolder === "enigmes"){
             setOpenedFolder("documentsFolder")
             setBarInfo("documentsFolder")
         }
@@ -206,9 +206,9 @@ function FileExplorer() {
             }
 
             {openedFolder == "documentsFolder" && <div className="flex flex-row cursor-pointer ml-5">
-                <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"games"} onClick={onpenGameFolder}>
+                <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"enigmes"} onClick={onpenGameFolder}>
                     <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
-                    <h1>Games</h1>
+                    <h1>Enigmes</h1>
                 </div>
 
                 <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFile}>
@@ -219,7 +219,7 @@ function FileExplorer() {
                 
             </div>}
 
-            {openedFolder == "games" &&
+            {openedFolder == "enigmes" &&
                 <div className="flex flex-row cursor-pointer ml-5">
                     <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFile}>
                         <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
