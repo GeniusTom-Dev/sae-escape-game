@@ -12,6 +12,5 @@ export {
 
     Terminal,
     FileExplorer,
-    
 
 }

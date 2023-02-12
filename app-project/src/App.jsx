@@ -7,17 +7,21 @@ const App = () => {
 
   const {modalState, setModalState} = useContext(UserContext)
   const [showIndice, setShowIndice] = useState(false)
+  const [showHelpBot,setShowHelpBot] = useState(true)
 
   const showConnectionPanel =  () => {
     if(sessionStorage.getItem("connected")){
       setModalState("interface")
+      setShowHelpBot(false)
     }else{
       setModalState("connectionPanel")
+      setShowHelpBot(false)
     }
   }
 
   const visibleIndice = () => {
     setShowIndice(true)
+    setShowHelpBot(false)
   }
 
   const hideConnectionPanel =  () => {
@@ -36,15 +40,29 @@ const App = () => {
 
   }, []);
 
+  const hideBot = () => {
+    setShowHelpBot(false)
+  }
+
 
   return(
     <div className='w-full h-[100vh] bg-no-repeat bg-[url(./assets/pc-background.jpg)] bg-cover bg-bottom text-white'>
-      <div className='absolute w-[55%] h-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-2/3 cursor-pointer' onClick={showConnectionPanel}></div>
+      <div className='absolute w-[55%] h-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-2/3 cursor-pointer z-0' onClick={showConnectionPanel}></div>
       <div className='absolute bottom-[5%] left-1/4 w-[35%] h-[15%] cursor-pointer' onClick={visibleIndice}></div>
       {modalState === "connectionPanel" && <Connection/>}
       {modalState === "interface" && <Interface/>}
       {showIndice && 
         <img src="./src/assets/indice1.png" alt="indice 1" className='absolute w-1/4 h-1/3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'/>
+      }
+
+      {showHelpBot &&
+        <div className="absolute bottom-0 left-4  flex flex-col items-center">
+          <div className="bg-white w-full mb-6 rounded-lg p-4">
+              <h1 className="text-black mb-4">Bienvenu dans Escape The Code !<br/>Je te laisse clicker sur l'ecran pour ouvrir l'ordinateur.</h1>
+              <button className='text-black absolute right-2 -translate-y-1/2' onClick={hideBot}>Fermer</button>
+          </div>
+          <img src="./src/assets/robot.png" alt="robot" />
+        </div>
       }
     </div>
   )

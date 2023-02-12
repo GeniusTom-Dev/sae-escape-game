@@ -34,3 +34,15 @@
 .font-hack > *{
   font-family: Hacked-KerX;
 }
+
+.p3d {
+  transform-style: preserve-3d;
+}
+
+.bfvh{
+  backface-visibility: hidden;
+}
+
+.rotateY{
+  transform: rotateY(180deg);
+}

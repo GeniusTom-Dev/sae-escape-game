@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../../context/userContext'
 
@@ -7,6 +6,7 @@ function Connection() {
 
   const { setModalState, username } = useContext(UserContext)
   const [errorMessage,setErrorMessage] = useState("")
+  const [showHelpBot,setShowHelpBot] = useState(false)
 
   const date = new Date()
   const timestamp = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()} : ${date.getMinutes() < 10 ? `0${date.getMinutes()}`: date.getMinutes()}`
@@ -23,6 +23,17 @@ function Connection() {
     }else if(e.key == "Backspace"){
       setErrorMessage("")
     }
+  }
+
+  useEffect(() => {
+    if(!sessionStorage.getItem("showConnectionHelpBot")){
+      setShowHelpBot(true)
+      sessionStorage.setItem("showConnectionHelpBot", true)
+    }
+  })
+
+  const hideBot = () => {
+    setShowHelpBot(false)
   }
 
   return (
@@ -43,6 +54,16 @@ function Connection() {
         </div>
 
         <img src="./src/assets/ubuntu.png" alt="ubuntu logo" className='absolute w-1/5 bottom-8 left-1/2 -translate-x-1/2'/>
+
+        {showHelpBot &&
+          <div className="absolute bottom-0 left-4  flex flex-col items-center">
+            <div className="bg-white w-full mb-6 rounded-lg p-4">
+            <h1 className="text-black mb-4">Mince l'ordinateur est verouiller !<br/>Cherche sur le bureau si tu n'a pas laisser<br/>un indice sur le mot de passe.</h1>
+                <button className='text-black absolute right-2 -translate-y-1/2' onClick={hideBot}>Fermer</button>
+            </div>
+            <img src="./src/assets/robot.png" alt="robot" />
+          </div>
+        }
     </div>
   )
 }

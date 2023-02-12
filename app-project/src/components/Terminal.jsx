@@ -1,4 +1,3 @@
-import React from 'react'
 import { useContext, useRef } from 'react'
 import { UserContext } from '../context/userContext'
 
@@ -27,10 +26,6 @@ function Terminal() {
             inputs.current[0].value = ""
         }
     }
-
-    
-
-    
 
   return (
     <div className='w-2/3 h-2/3 bg-[#300a24] relative rounded-lg'>

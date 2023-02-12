@@ -8,7 +8,8 @@ function FileExplorer() {
     const [openedFolder, setOpenedFolder] = useState("personalFolder")
     const [currentFolderName, setCurrentFolderName] = useState("Dossier Personel")
     const [currentFolderImage, setCurrentFolderImage] = useState("house")
-    const { closeWindow,lockInstructionFile } = useContext(UserContext)
+    const [showHiddenImage, setShowHiddenImage] = useState(false)
+    const { username,closeWindow,lockInstructionFile,nameExtractFile } = useContext(UserContext)
 
     const tryOpenFile = () => {
         if(lockInstructionFile){
@@ -16,6 +17,10 @@ function FileExplorer() {
         }else{
             setShowTerminalMessage(true)
         }
+    }
+
+    const tryOpenFileExtract = () => {
+        setShowTerminalMessage(true)
     }
 
     const hideMessage = () => {
@@ -37,7 +42,7 @@ function FileExplorer() {
             setCurrentFolderName("Documents")
             setCurrentFolderImage("file-lines")
 
-        }else if(info == "imageFolder"){            
+        }else if(info == "imagesFolder"){            
             setCurrentFolderName("Images")
             setCurrentFolderImage("image")
 
@@ -83,12 +88,20 @@ function FileExplorer() {
             setBarInfo("documentsFolder")
         }
 
-        const link = ["documentsFolder", "imageFolder", "musicFolder", "downloadFolder", "videoFolder"]
+        const link = ["documentsFolder", "imagesFolder", "musicFolder", "downloadFolder", "videoFolder"]
         let search = link.find(element => element == openedFolder)
         if(search){
             setOpenedFolder("personalFolder")
             setBarInfo("personalFolder")
         }
+    }
+
+    const showImage = () => {
+        setShowHiddenImage(true)
+    }
+
+    const hideImage = () => {
+        setShowHiddenImage(false)
     }
 
   return (
@@ -141,9 +154,9 @@ function FileExplorer() {
                 <h1 className="text-sm ml-2">Documents</h1>
             </div>
 
-            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"imageFolder"} onClick={catClick}>
+            <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"imagesFolder"} onClick={catClick}>
                 <img src="./src/assets/icons/image.svg" alt="house" className="w-4 h-4 ml-2"/>
-                <h1 className="text-sm ml-2">Image</h1>
+                <h1 className="text-sm ml-2">Images</h1>
             </div>
 
             <div className="flex flex-row items-center mt-4 cursor-pointer" data-catname={"musicFolder"} onClick={catClick}>
@@ -181,7 +194,7 @@ function FileExplorer() {
                             <h1>Documents</h1>
                         </div>
 
-                        <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"imageFolder"} onClick={catClick} >
+                        <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"imagesFolder"} onClick={catClick} >
                             <img src="./src/assets/iconsSoftware/folder.png" alt="file" className="w-10 h-10"/>
                             <h1>Images</h1>
                         </div>
@@ -228,7 +241,50 @@ function FileExplorer() {
                 </div>
             }
 
+            {openedFolder == "imagesFolder" && <div className="flex flex-row cursor-pointer ml-5">
+                <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"enigmes"} onClick={showImage}>
+                    <img src="./src/assets/image-hidden-message.jpg" alt="image" className="w-20 h-10"/>
+                    <h1>montagne.png</h1>
+                </div>
+
+            {nameExtractFile && 
+                <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"enigmes"} onClick={tryOpenFileExtract}>
+                    <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
+                    <h1>{nameExtractFile}</h1>
+                </div>
+            }
+                
+            </div>}
+
         </div>
+
+        {/* Show Image */}
+
+        {showHiddenImage &&
+            <div className='w-1/3 h-2/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg'>
+                <div className='bg-[#181818] w-full h-6 absolute rounded-t-lg'>
+                    <div className='absolute left-1/2 -translate-x-1/2'>{username}: ~/montagne.png</div>
+                    <div className='w-16 absolute right-2 flex flex-row justify-around top-1/2 -translate-y-1/2 cursor-pointer' onClick={hideImage}>
+
+                        <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
+                            <img src="./src/assets/icons/minus.svg" alt="minus" className='w-2'/>
+                        </div>
+
+                        <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
+                            <img src="./src/assets/icons/square.svg" alt="square" className='w-2'/>
+                        </div>
+
+                        <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
+                            <img src="./src/assets/icons/cross.svg" alt="cross" className='w-2'/>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <img src="./src/assets/image-hidden-message.jpg" alt="montaine" className="mt-6 rounded-b-lg"/>
+                </div>
+            </div>
+        }
 
          {/* Error Message */}
 
@@ -254,7 +310,7 @@ function FileExplorer() {
         {showTerminalMessage && 
             <div className="bg-[#333333] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 rounded-lg flex justify-center">
                 <div className="bg-[#1f1f1f] absolute w-full h-8 flex justify-center items-center rounded-t-lg">Error</div>
-                <h1 className="w-4/5 mt-10">Le fichier que vous tentez d'ouvrir est dévérouiller mais ne peut être ouvert que dans le terminal.</h1>
+                <h1 className="w-4/5 mt-10">Les fichiers txt ne peuvent être ouvert uniquement avec le terminal.</h1>
                 <button className="bg-[#1f1f1f] absolute bottom-2 right-4 py-1 px-2 rounded-md" onClick={hideMessage}>Fermer</button>
             </div>
         }
