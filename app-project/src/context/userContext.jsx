@@ -116,10 +116,9 @@ export function UserContextProvider(props){
     }
 
     const commandCd = (command) => {
-        const link = ["Documents", "Images", "Musique", "Téléchargements", "Vidéo"]
+        const link = ["Documents", "Images", "Musique", "Téléchargements", "Vidéo", "Documents/Enigmes"]
         if(command == "cd"){
             setCurrentFolder(`~`)
-            addInfo(command, <div></div>)
             return
         }else if(command.split(' ')[1] == ".."){
             if(currentFolder == "~/Documents/Enigmes"){
@@ -239,7 +238,7 @@ export function UserContextProvider(props){
     }
 
     const manCommand = (command) => {
-        let commandList = ['cd', 'ls', 'chmod', 'cat', 'cesar','steghide','useradd']
+        let commandList = ['cd', 'ls', 'chmod', 'cat', 'cesar','steghide','useradd','./']
         let search = commandList.find(element => element == command.split(' ')[1])
         if(search){
             addInfo(command)
@@ -266,6 +265,10 @@ export function UserContextProvider(props){
 
     const commandStegHide = (command) => {
         let args = command.split(' ')
+        if(args.length != 7){
+            addInfo(command, <div><p>Args count Error. Check the man</p></div>)
+            return
+        }
         if(currentFolder == "~/Images"){
             if(args[0] == "steghide" && args[1] == "extract" && args[2] == "-sf" && args[3] == "montagne.png" && args[4] == "-xf" && args[6] == "-p" ){
                 setNameExtractFile(args[5])

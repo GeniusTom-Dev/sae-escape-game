@@ -17,7 +17,6 @@ function Interface() {
   let timestamp = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()} : ${date.getMinutes() < 10 ? `0${date.getMinutes()}`: date.getMinutes()}`
   
   const showApp = (e) => {
-    
     if(!e.target.dataset.app_name){
       if(e.target.parentElement.dataset.app_name){
         setShowedApp(e.target.parentElement.dataset.app_name)
@@ -79,7 +78,6 @@ function Interface() {
         {showedApp == "fileexplorer" && <FileExplorer/>}
         {showedApp == "fingerprint" && <Fingerprint/>}
         {showedApp == "quiz" && <Quiz/>}
-        {showedApp == "chrome" && <Chrome/>}
         {showedApp == "chrome" && <Chrome/>}
         {showedApp == "vision" && <Vision/>}
 

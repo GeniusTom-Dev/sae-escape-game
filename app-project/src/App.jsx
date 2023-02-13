@@ -13,9 +13,11 @@ const App = () => {
     if(sessionStorage.getItem("connected")){
       setModalState("interface")
       setShowHelpBot(false)
+      setShowIndice(false)
     }else{
       setModalState("connectionPanel")
       setShowHelpBot(false)
+      setShowIndice(false)
     }
   }
 

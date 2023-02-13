@@ -10,6 +10,7 @@ export const commands = [
             <p className="ml-4"><code className='text-red-700'>ls</code> - Voir la liste des fichiers dans le répertoire présent</p>
             <p className="ml-4"><code className='text-red-700'>chmod</code> - Modifier les permissions d'un fichier/dossier</p>
             <p className="ml-4"><code className='text-red-700'>cat</code> - Afficher le contenu d'un fichier</p>
+            <p className="ml-4"><code className='text-red-700'>./</code> - Lancer un fichier .sh</p>
             <p className="ml-4"><code className='text-red-700'>cesar</code> - Décrypte un message coder</p>
             <p className="ml-4"><code className='text-red-700'>steghide</code> - Extraire un fichier caché dans une image</p>
             <p className="ml-4"><code className='text-red-700'>useradd</code> - Crée un utilisateur</p>
@@ -149,10 +150,24 @@ export const commands = [
         returnText: 
         <div>
             <h1>Name</h1>
-            <p className="ml-4">steghide - Extract file from image</p>
+            <p className="ml-4">useradd - create new user</p>
 
             <h1 className="mt-4">SYNOPSIS</h1>
             <p className="ml-4">useradd username</p>
+
+        </div>
+
+    },
+
+    {
+        command: "man ./",
+        returnText: 
+        <div>
+            <h1>Name</h1>
+            <p className="ml-4">./ - Start script</p>
+
+            <h1 className="mt-4">SYNOPSIS</h1>
+            <p className="ml-4">./namefile.sh</p>
 
         </div>
 

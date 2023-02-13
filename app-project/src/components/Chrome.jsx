@@ -33,15 +33,15 @@ function Chrome() {
                 <img src="./src/assets/icons/cross.svg" alt="cross" className='absolute right-0 w-4 h-4 mx-2 rounded-sm'/>
             </div>
             <div className='bg-[#353535] w-full h-[7.5%] absolute bottom-[82.5%] flex items-center'>
-                <div className='w-[10%] flex justify-around items-center'>
+                <div className='w-[15%] flex justify-around items-center'>
                     <img src="./src/assets/icons/arrow-left.svg" alt="arrow left" className="w-4 h-4"/>
                     <img src="./src/assets/icons/arrow-right.svg" alt="arrow right" className="w-4 h-4"/>
                     <img src="./src/assets/icons/arrow-rotate.svg" alt="arrow rotate" className="w-4 h-4"/>
                     <img src="./src/assets/icons/house.svg" alt="house" className="w-4 h-4"/>
                 </div>
-                <input type="text" value="https://fr.wikipedia.org/wiki/Linux" readOnly className='w-[80%] bg-[#202124] rounded-xl pl-4'/>
+                <input type="text" value="https://fr.geniuswiki.org/wiki/Linux" readOnly className='w-[70%] bg-[#202124] rounded-xl pl-4 outline-none'/>
 
-                <div className='w-[10%] flex justify-around items-center'>
+                <div className='w-[15%] flex justify-around items-center'>
                     <img src="./src/assets/icons/puzzle-piece.svg" alt="puzzle-piece" className="w-4 h-4"/>
                     <img src="./src/assets/icons/user.svg" alt="user" className="w-4 h-4"/>
                     <img src="./src/assets/icons/three-dot.svg" alt="three-dot" className="w-4 h-4"/>
@@ -50,12 +50,15 @@ function Chrome() {
             </div>
 
             <div className='bg-white text-black h-[82.5%] w-full absolute bottom-0 rounded-b-lg overflow-y-scroll'>
-                <div className='w-full flex h-[15%] items-center relative'>
-                    <img src="./src/assets/icons/bars.svg" alt="bars" className="w-[10%] h-[40%]"/>
-                    <img src="./src/assets/wikipedia-logo.png" alt="wikipedia-logo" className='w-1/5'/>
-                    <input type="text" placeholder="Rechercher sur Wikipédia" className='w-2/5 h-2/5 border-2 pl-4'/>
+                <div className='w-full flex h-[15%] justify-around items-center relative'>
+                    <div className='flex h-full items-center justify-center'>
+                        <img src="./src/assets/icons/bars.svg" alt="bars" className="w-[10%] h-[40%]"/>
+                        <img src="./src/assets/atom.png" alt="wikipedia-logo" className='w-10 ml-2'/>
+                        <h1>GeniusWiki</h1>
+                    </div>
+                    <input type="text" placeholder="Rechercher sur GeniusWiki" className='w-2/5 h-2/5 border-2 pl-4'/>
 
-                    <div className='absolute right-0 flex order-2 items-center'>
+                    <div className='flex items-center'>
                         <a href="" className='mx-2 text-[#466cd1] hover:underline'>Crée un compte</a>
                         <a href="" className='mx-2 text-[#466cd1] hover:underline'>Se connecter</a>
                         <img src="./src/assets/icons/three-dot-black.svg" alt="three-dot" className="w-4 h-4 rotate-90 mx-2 mr-4"/>
@@ -63,7 +66,7 @@ function Chrome() {
                 </div>
 
                 <div className='w-full h-auto flex justify-center mt-12'>
-                    <div className='w-3/5 h-auto flex'>
+                    <div className='w-4/5 h-auto flex'>
                         <div className='w-[70%] h-auto'>
                             <h1 className='text-2xl'>Linux</h1>
                             <div className='w-full h-[1px] bg-gray-400'></div>
@@ -79,7 +82,7 @@ function Chrome() {
 
                         </div>
 
-                        <div className='w-[30%] h-auto border-[1px] flex flex-col items-center ml-2'>
+                        <div className='w-[40%] h-auto border-[1px] flex flex-col items-center ml-2'>
                             <div className='w-[95%] h-[7.5%] p-4 bg-[#dddddd] flex flex-col justify-center items-center my-2'>
                                 <h1>GNU/Linux</h1>
                                 <h2>Linux</h2>

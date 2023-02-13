@@ -109,12 +109,12 @@ function Fingerprint() {
 
             {!gameState && 
                 <div className='w-full h-full flex'>
-                    <h1 className='flex w-full absolute justify-center text-lg font-hack mt-2'>Find matching footprints</h1>
                     <div className='w-1/2 h-full flex items-center justify-center'>
                         <img src={`./src/assets/fingerprint/finger-${fingerprintIndex[0]}.webp`} alt="fingerprint" className='h-[90%]'/>
                     </div>
 
-                    <div className='w-1/2 h-full grid grid-cols-2 justify-center content-center'>
+                    <div className='w-[70%] p-0 grid grid-cols-3 justify-center content-center'>
+                    <h1 className='flex w-full justify-center text-lg font-hack mt-2'>Trouver les bout d'empreintre correspondantes</h1>
                         {fingerprintList.map(nav => (
                             <img src={`./src/assets/fingerprint/finger-${fingerprintIndex[0]}-${nav}.webp`} key={nav} data-index={nav} alt="fingerprint" className={`cursor-pointer  w-1/2 ${listClicked.indexOf(nav) >=0 && `border-[1px] border-green-500 -m-[1px]`}`} onClick={clickFinger}/>
                         ))}
@@ -130,16 +130,16 @@ function Fingerprint() {
             }
 
             {gameState == "loose" && 
-                <div className='w-full h-full flex flex-col justify-around items-center  text-6xl'>
-                    <div className='w-full font-hack flex flex-col justify-center items-center'>
+                <div className='w-full h-full flex flex-col justify-center items-center font-hack'>
+                    <div className='font-hack flex flex-col justify-center text-center text-6xl'>
                         <h1>Dommage</h1>
                         <h1>Relancer le jeu pour retenter votre chance</h1>
                     </div>
-
-                    <div className='font-hack border-[1px] p-4 rounded-lg cursor-pointer' onClick={restartQuiz}>Relancer</div>
+                    <div className='font-hack border-[1px] p-4 rounded-lg cursor-pointer text-4xl mt-8' onClick={restartQuiz}>Relancer</div>
                 </div>
-            
             }
+
+
         </div>
         
     </div>

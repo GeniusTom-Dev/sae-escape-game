@@ -234,7 +234,12 @@ function FileExplorer() {
 
             {openedFolder == "enigmes" &&
                 <div className="flex flex-row cursor-pointer ml-5">
-                    <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFile}>
+                    <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFileExtract}>
+                        <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
+                        <h1>cryptedpassword.txt</h1>
+                    </div> 
+
+                    <div className="flex flex-col items-center cursor-pointer ml-5" data-catname={"videoFolder"} onClick={tryOpenFileExtract}>
                         <img src="./src/assets/iconsSoftware/file.png" alt="file" className="w-10 h-10"/>
                         <h1>fingerprint.sh</h1>
                     </div>   
@@ -261,7 +266,7 @@ function FileExplorer() {
         {/* Show Image */}
 
         {showHiddenImage &&
-            <div className='w-1/3 h-2/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg'>
+            <div className='w-1/2 h-2/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg'>
                 <div className='bg-[#181818] w-full h-6 absolute rounded-t-lg'>
                     <div className='absolute left-1/2 -translate-x-1/2'>{username}: ~/montagne.png</div>
                     <div className='w-16 absolute right-2 flex flex-row justify-around top-1/2 -translate-y-1/2 cursor-pointer' onClick={hideImage}>
