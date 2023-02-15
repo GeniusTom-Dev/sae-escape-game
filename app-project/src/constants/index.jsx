@@ -4,16 +4,16 @@ export const commands = [
         returnText: 
         <div>
             <h1>Voici la liste des commandes disponibles :</h1>
-            <p className="ml-4"><code className='text-red-700'>help</code> - List des commandes</p>
+            <p className="ml-4"><code className='text-red-700'>help</code> - Liste des commandes</p>
+            <p className="ml-4"><code className='text-red-700'>useradd</code> - Crée un utilisateur</p>
             <p className="ml-4"><code className='text-red-700'>man</code> - Voir le manuel d'une commande</p>
-            <p className="ml-4"><code className='text-red-700'>cd</code> - changer de fichier</p>
+            <p className="ml-4"><code className='text-red-700'>cd</code> - changer de dossier</p>
             <p className="ml-4"><code className='text-red-700'>ls</code> - Voir la liste des fichiers dans le répertoire présent</p>
             <p className="ml-4"><code className='text-red-700'>chmod</code> - Modifier les permissions d'un fichier/dossier</p>
             <p className="ml-4"><code className='text-red-700'>cat</code> - Afficher le contenu d'un fichier</p>
             <p className="ml-4"><code className='text-red-700'>./</code> - Lancer un fichier .sh</p>
-            <p className="ml-4"><code className='text-red-700'>cesar</code> - Décrypte un message coder</p>
+            <p className="ml-4"><code className='text-red-700'>cesar</code> - Décrypte un message codé</p>
             <p className="ml-4"><code className='text-red-700'>steghide</code> - Extraire un fichier caché dans une image</p>
-            <p className="ml-4"><code className='text-red-700'>useradd</code> - Crée un utilisateur</p>
         </div>
 
     },
@@ -22,7 +22,7 @@ export const commands = [
         command: "chmod 777 instructions.txt",
         returnText: 
         <div>
-            <p>Fichier Dévérouiller</p>
+            <p>Fichier Dévérouillé</p>
         </div>
 
     },
@@ -299,8 +299,7 @@ export const instrcutionsText = <div>
     <p className="mt-4 ml-4">
     Comme dit précédemment avec la commande <code className='text-red-700'>help</code> vous pourrez voir la liste des commandes
     disponibles lors de votre aventure, toutes les commandes vous seront utiles donc si vous ne savez pas quoi faire, découvrez les !
-    Si l'une vous est inconnu, avec la commande <code className='text-red-700'>man</code> vous pouvez en voir son utilisation avec
-    son synopsis et et possible exemple. Des enigmes vous sont disponible dans vos fichiers, il vous suffit de fouiller l'ordinateur !
-    Au fur et à mesure du temps des indices vous seront donnés si vous bloquer.
+    Si l'une vous est inconnue, avec la commande <code className='text-red-700'>man</code> vous pouvez en voir son utilisation avec
+    son synopsis et un possible exemple. Des enigmes vous sont disponibles dans vos fichiers, il vous suffit de fouiller l'ordinateur !
     </p>
 </div>

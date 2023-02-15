@@ -27,8 +27,14 @@ export function UserContextProvider(props){
     const [showData, setShowData] = useState([])
     const [value,setValue] = useState();
 
+    const [connected,setConnected] = useState(false);
+    const [showInterfaceHelpBot,setShowInterfaceHelpBot] = useState(false);
+    const [showConnectionHelpBot,setShowConnectionHelpBot] = useState(false);
+
+
+
     // Quiz
-    const [progressBar, setProgressBar] = useState("w-0/5")
+    const [progressBar, setProgressBar] = useState("w-0")
     const [questionIndex, setQuestionIndex] = useState(0)
     const [quizError, setQuizError] = useState(0)
 
@@ -44,10 +50,10 @@ export function UserContextProvider(props){
 
     const [nameExtractFile,setNameExtractFile] = useState(false)
 
-    const [fingerprintIndex,setFingerprintIndex] = useState(removeLastItem([1,2,3,4].sort(function () {
+    const [fingerprintIndex,setFingerprintIndex] = useState(removeLastItem([0,1,2,3].sort(function () {
         return Math.random() - 0.5;
     })))
-    const [fingerprintList,setFingerprintList] = useState([1,2,3,4,5,6,7,8].sort(function () {
+    const [fingerprintList,setFingerprintList] = useState([0,1,2,3,4,5,6,7].sort(function () {
         return Math.random() - 0.5;
     }))
     const [listClicked, setListClicked] = useState([])
@@ -192,7 +198,7 @@ export function UserContextProvider(props){
             }
         }else if(nameFile == nameExtractFile){
             if(currentFolder === "~/Images"){
-                addInfo(command, <div><p>Le code dechiffrer est : {import.meta.env.VITE_REACT_APP_HIDDEN_MESSAGE_CODE}</p></div>)
+                addInfo(command, <div><p>Le code dechiffré est : {import.meta.env.VITE_REACT_APP_HIDDEN_MESSAGE_CODE}</p></div>)
             }else{
                 addInfo(command, <div><p>File not found</p></div>)
             }
@@ -368,9 +374,6 @@ export function UserContextProvider(props){
     }
 
     const resetGame = () => {
-        sessionStorage.removeItem("connected")
-        sessionStorage.removeItem("showInterfaceHelpBot")
-        sessionStorage.removeItem("showConnectionHelpBot")
         window.location.reload()
     }
 
@@ -382,7 +385,8 @@ export function UserContextProvider(props){
           fingerprintIndex,setFingerprintIndex,fingerprintList,setFingerprintList,gameState, setGameState, listClicked, setListClicked,
           nameExtractFile, showIntructionBot,setShowIntructionBot,timestamp, showNotif,setShowNotif,showHelpBot,setShowHelpBot,
           visionConnection,setVisionConnections,percentage,setPercentage,cleanpc, setCleanpc,showFinalBot,setShowFinalBot,
-          looseGame, setLooseGame,resetGame}}>
+          looseGame, setLooseGame,resetGame,connected,setConnected,showInterfaceHelpBot,setShowInterfaceHelpBot,showConnectionHelpBot,setShowConnectionHelpBot,
+          }}>
             {props.children}
         </UserContext.Provider>
     )

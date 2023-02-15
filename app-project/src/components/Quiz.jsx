@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/userContext'
 import { questions } from '../constants'
+import { cross, minus, square } from '../assets'
 
 function Quiz() {
 
@@ -60,15 +61,15 @@ function Quiz() {
             <div className='w-16 absolute right-2 flex flex-row justify-around top-1/2 -translate-y-1/2 cursor-pointer' onClick={closeWindow}>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/icons/minus.svg" alt="minus" className='w-2'/>
+                    <img src={minus} alt="minus" className='w-2'/>
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/icons/square.svg" alt="square" className='w-2'/>
+                    <img src={square} alt="square" className='w-2'/>
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/icons/cross.svg" alt="cross" className='w-2'/>
+                    <img src={cross} alt="cross" className='w-2'/>
                 </div>
             </div>
         </div>
@@ -83,7 +84,7 @@ function Quiz() {
                 </div>
             }
 
-                {typeof questionIndex == "number" && <h1 className='mt-4 text-2xl'>{questions[questionIndex].question}</h1>}
+                {typeof questionIndex == "number" && <h1 className='mt-4 text-2xl text-center'>{questions[questionIndex].question}</h1>}
 
                 {typeof questionIndex == "number" &&
                         <div className='w-4/5 h-4/5 flex flex-col items-center justify-around'>
@@ -98,7 +99,7 @@ function Quiz() {
                 {questionIndex == "win" && 
                     <div className='w-full h-full flex flex-col justify-center items-center font-hack text-6xl'>
                         <h1>Felicitation</h1>
-                        <h1>Le code dechiffrer est : {import.meta.env.VITE_REACT_APP_QUIZ_CODE}</h1>
+                        <h1>Le code dechiffré est : {import.meta.env.VITE_REACT_APP_QUIZ_CODE}</h1>
                     </div>
                 }
 

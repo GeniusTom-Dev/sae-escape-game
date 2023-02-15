@@ -1,4 +1,5 @@
 import { useContext, useRef } from 'react'
+import { cross, minus, square } from '../assets'
 import { UserContext } from '../context/userContext'
 
 function Terminal() {
@@ -36,21 +37,21 @@ function Terminal() {
             <div className='w-16 absolute right-2 flex flex-row justify-around top-1/2 -translate-y-1/2 cursor-pointer' onClick={closeWindow}>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/icons/minus.svg" alt="minus" className='w-2'/>
+                    <img src={minus} alt="minus" className='w-2'/>
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/icons/square.svg" alt="square" className='w-2'/>
+                    <img src={square} alt="square" className='w-2'/>
                 </div>
 
                 <div className='w-4 h-4 bg-[#373737] rounded-full flex justify-center items-center'>
-                    <img src="./src/assets/icons/cross.svg" alt="cross" className='w-2'/>
+                    <img src={cross} alt="cross" className='w-2'/>
                 </div>
             </div>
         </div>
 
         <div className='w-full h-[calc(100%-1.5rem)] absolute bottom-0 p-4 overflow-y-scroll' id='screen'>
-            <h1>Pour connaitre les commande disponible utiliser la commande <code className='text-red-700'>help</code>.</h1>
+            <h1>Pour connaitre les commandes disponibles utiliser la commande <code className='text-red-700'>help</code>.</h1>
 
             {showData && showData.map((nav,i) => (
                 <div key={i}>
