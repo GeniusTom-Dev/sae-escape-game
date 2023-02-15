@@ -14,7 +14,9 @@ function Terminal() {
 
     const updateScroll = () => {
         var terminalScreen = document.getElementById("screen");
-        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+        if(terminalScreen.scrollHeight){
+            terminalScreen.scrollTop = terminalScreen.scrollHeight;
+        }
     }
 
     const keyDown = async (e) => {

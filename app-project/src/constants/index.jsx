@@ -178,10 +178,11 @@ export const questions = [
     {
         question: "Qui est le créateur de linux ?",
         anwser: [
-            "Linus Torvalds",
             "James Gosling",
-            "Bill Gates",
-            "Steve Jobs"
+            "Linus Torvalds",
+            "Steve Jobs",
+            "Bill Gates"
+            
         ],
         correctAnwser: "Linus Torvalds"
     },
@@ -189,9 +190,9 @@ export const questions = [
     {
         question: "Quand est paru Linux ?",
         anwser: [
-            "1991",
-            "1995",
             "1985",
+            "1995",
+            "1991",
             "1999"
         ],
         correctAnwser: "1991"
@@ -200,10 +201,11 @@ export const questions = [
     {
         question: "Quelle commande permet de modifier les permissions d'un Fichier / Dossier ?",
         anwser: [
-            "chmod",
             "cd",
             "ls",
-            "cesar"
+            "cesar",
+            "chmod",
+            
         ],
         correctAnwser: "chmod"
     },

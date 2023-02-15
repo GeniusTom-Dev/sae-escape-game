@@ -49,8 +49,12 @@ const App = () => {
 
   return(
     <div className='w-full h-[100vh] bg-no-repeat bg-[url(./assets/pc-background.jpg)] bg-cover bg-bottom text-white'>
-      <div className='absolute w-[55%] h-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-2/3 cursor-pointer z-0' onClick={showConnectionPanel}></div>
-      <div className='absolute bottom-[5%] left-1/4 w-[35%] h-[15%] cursor-pointer' onClick={visibleIndice}></div>
+      <div className='bg-gradient-to-r from-[#139dff] to-[#c27bff] w-full h-full flex flex-col justify-center items-center lg:hidden'>
+        <img src="./src/assets/icons/mobile.svg" alt="movile" className='w-1/3 mb-24'/>
+        <h1 className='text-center text-2xl'>Escape the code n'est pas disponible sur votre appareil pour le moment rendez vous sur un ordinateur.</h1>
+      </div>
+      <div className='absolute w-[55%] h-[40%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-2/3 cursor-pointer z-0 hidden lg:flex' onClick={showConnectionPanel}></div>
+      <div className='absolute bottom-[5%] left-1/4 w-[35%] h-[15%] cursor-pointer hidden lg:flex' onClick={visibleIndice}></div>
       {modalState === "connectionPanel" && <Connection/>}
       {modalState === "interface" && <Interface/>}
       {showIndice && 

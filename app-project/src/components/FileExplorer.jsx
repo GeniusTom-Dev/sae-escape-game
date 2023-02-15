@@ -63,7 +63,6 @@ function FileExplorer() {
         }else if(info == "enigmes"){            
             setCurrentFolderName("Documents\u005CEnigmes")
             setCurrentFolderImage("gamepad")
-            console.log("cououc")
         }
     }
 
@@ -296,7 +295,7 @@ function FileExplorer() {
         {showErrorMessage && 
             <div className="bg-[#333333] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/5 h-2/5 rounded-lg flex justify-center">
                 <div className="bg-[#1f1f1f] absolute w-full h-8 flex justify-center items-center rounded-t-lg">Error</div>
-                <h1 className="w-4/5 mt-10">Le fichier que vous tentez d'ouvrir est verouiller.</h1>
+                <h1 className="w-4/5 mt-10">Le fichier que vous tentez d'ouvrir est verouillé.</h1>
                 <button className="bg-[#1f1f1f] absolute bottom-2 right-4 py-1 px-2 rounded-md" onClick={hideMessage}>Fermer</button>
             </div>
         }
@@ -306,7 +305,7 @@ function FileExplorer() {
         {showErrorMessage && 
             <div className="absolute -bottom-1/2 left-0 -translate-x-[20rem] -translate-y-8 flex flex-col items-center">
                 <div className="bg-white w-full h-20 mb-6 rounded-lg p-4">
-                    <h1 className="text-black">Le fichier est verouiller !<br/>Tu devrais pouvoir le déverouiller avec ton termial</h1>
+                    <h1 className="text-black">Le fichier est verouillé !<br/>Tu devrais pouvoir le déverouiller avec ton termial.</h1>
                 </div>
                 <img src="./src/assets/robot.png" alt="robot" />
             </div>

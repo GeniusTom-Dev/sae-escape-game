@@ -58,7 +58,7 @@ function Connection() {
         {showHelpBot &&
           <div className="absolute bottom-0 left-4  flex flex-col items-center">
             <div className="bg-white w-full mb-6 rounded-lg p-4">
-            <h1 className="text-black mb-4">Mince l'ordinateur est verouiller !<br/>Cherche sur le bureau si tu n'a pas laisser<br/>un indice sur le mot de passe.</h1>
+            <h1 className="text-black mb-4">Mince l'ordinateur est verouillé !<br/>Cherche sur le bureau si tu n'a pas laisser<br/>un indice sur le mot de passe.</h1>
                 <button className='text-black absolute right-2 -translate-y-1/2' onClick={hideBot}>Fermer</button>
             </div>
             <img src="./src/assets/robot.png" alt="robot" />

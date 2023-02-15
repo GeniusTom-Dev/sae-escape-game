@@ -84,16 +84,16 @@
 }
 
 .circle-animate-green-1{
-  border: 1px solid greenyellow;
-  box-shadow: 0 0 1em greenyellow;
+  border: 1px solid green;
+  box-shadow: 0 0 1em green;
   border-radius: 999999px;
   animation: circle1 2.5s linear infinite;
   background: transparent;
 }
 
 .circle-animate-green-2{
-  border: 1px solid greenyellow;
-  box-shadow: 0 0 1em greenyellow;
+  border: 1px solid green;
+  box-shadow: 0 0 1em green;
   border-radius: 999999px;
   animation: circle2 2.5s linear infinite;
   background: transparent;

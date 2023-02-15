@@ -5,7 +5,7 @@ import { questions } from '../constants'
 function Quiz() {
 
     const {username, closeWindow, progressBar,setProgressBar,questionIndex, setQuestionIndex,quizError, setQuizError} = useContext(UserContext)
-    
+    const [value, setValue] = useState()
 
     const shuffle = (list) => {
         list.sort(function () {
@@ -22,7 +22,8 @@ function Quiz() {
                 let newIndex = questionIndex
                 newIndex += 1
                 setQuestionIndex(newIndex)
-                setProgressBar(`w-[${newIndex * 20}%]`)
+                setProgressBar(`w-${newIndex}/5`)
+                setValue({})
             }
             
         }else{
@@ -86,7 +87,7 @@ function Quiz() {
 
                 {typeof questionIndex == "number" &&
                         <div className='w-4/5 h-4/5 flex flex-col items-center justify-around'>
-                            {shuffle(questions[questionIndex].anwser).map((nav, i) => (
+                            {questions[questionIndex].anwser.map((nav, i) => (
                                 <div key={i} className='bg-[#1f222a] w-2/3 h-1/6 hover:border-[1px] rounded-lg flex items-center justify-center cursor-pointer' data-anwser={nav} onClick={selectAnwser}>
                                     <h1>{nav}</h1>
                                 </div>
@@ -105,7 +106,7 @@ function Quiz() {
                     <div className='w-full h-full flex flex-col justify-around items-center  text-6xl'>
                         <div className='w-full font-hack flex flex-col justify-center items-center'>
                             <h1>Dommage</h1>
-                            <h1>Relancer le jeu pour retenter votre chance</h1>
+                            <h1 className='w-2/3 text-center'>Relancer le jeu pour retenter votre chance</h1>
                         </div>
 
                         <div className='font-hack border-[1px] p-4 rounded-lg cursor-pointer' onClick={restartQuiz}>Relancer</div>

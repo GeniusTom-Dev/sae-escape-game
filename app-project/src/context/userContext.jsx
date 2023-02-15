@@ -14,6 +14,7 @@ export function UserContextProvider(props){
     const [modalState, setModalState] = useState()
 
     const [showedApp, setShowedApp] = useState("")
+    const [looseGame, setLooseGame] = useState(false)
 
     const [showIntructionBot,setShowIntructionBot] = useState(false)
     const [showHelpBot,setShowHelpBot] = useState(false)
@@ -27,7 +28,7 @@ export function UserContextProvider(props){
     const [value,setValue] = useState();
 
     // Quiz
-    const [progressBar, setProgressBar] = useState("w-[0%]")
+    const [progressBar, setProgressBar] = useState("w-0/5")
     const [questionIndex, setQuestionIndex] = useState(0)
     const [quizError, setQuizError] = useState(0)
 
@@ -58,7 +59,11 @@ export function UserContextProvider(props){
     }
 
     // Vison
-    const [visionConnection,setVisionConnections] = useState(true)
+    const [visionConnection,setVisionConnections] = useState(false)
+    const [percentage,setPercentage] = useState([0,0,0])
+    const [cleanpc, setCleanpc] = useState(false)
+    const [showFinalBot,setShowFinalBot] = useState(false)
+
 
     const addInfo = (command,returnText) => {
         let info
@@ -167,7 +172,7 @@ export function UserContextProvider(props){
         if(nameFile == "instructions.txt"){
             if(currentFolder === "~/Documents"){
                 if(lockInstructionFile){
-                    addInfo(command, <div><p>Fichier Verouiller</p></div>)
+                    addInfo(command, <div><p>Fichier Verouillé</p></div>)
                 }else{
                     addInfo(command, instrcutionsText)
                 }
@@ -266,7 +271,7 @@ export function UserContextProvider(props){
             setShowHelpBot(false)
             setShowIntructionBot(true)
             setShowNotif(true)
-            setTimestamp( Date.now())
+            setTimestamp(Date.now())
             addInfo(command, <div><p>User create with name: {name[1]}</p></div>)
         }else{
             addInfo(command, <div><p>User Already Create</p></div>)
@@ -362,6 +367,13 @@ export function UserContextProvider(props){
         
     }
 
+    const resetGame = () => {
+        sessionStorage.removeItem("connected")
+        sessionStorage.removeItem("showInterfaceHelpBot")
+        sessionStorage.removeItem("showConnectionHelpBot")
+        window.location.reload()
+    }
+
 
     return(
         <UserContext.Provider value={{username, setUsername,modalState, setModalState,showedApp,
@@ -369,7 +381,8 @@ export function UserContextProvider(props){
           currentFolder, showedIcon,progressBar,setProgressBar,questionIndex, setQuestionIndex,quizError, setQuizError,
           fingerprintIndex,setFingerprintIndex,fingerprintList,setFingerprintList,gameState, setGameState, listClicked, setListClicked,
           nameExtractFile, showIntructionBot,setShowIntructionBot,timestamp, showNotif,setShowNotif,showHelpBot,setShowHelpBot,
-          visionConnection,setVisionConnections}}>
+          visionConnection,setVisionConnections,percentage,setPercentage,cleanpc, setCleanpc,showFinalBot,setShowFinalBot,
+          looseGame, setLooseGame,resetGame}}>
             {props.children}
         </UserContext.Provider>
     )

@@ -9,7 +9,7 @@ import Vision from "../Vision"
 
 function Interface() {
 
-  const {username,showedApp, setShowedApp,showedIcon,showIntructionBot,setShowIntructionBot,timestamp,showNotif,setShowNotif,showHelpBot,setShowHelpBot} = useContext(UserContext)
+  const {username,showedApp, setShowedApp,showedIcon,showIntructionBot,setShowIntructionBot,timestamp,showNotif,setShowNotif,showHelpBot,setShowHelpBot,looseGame, setLooseGame,resetGame} = useContext(UserContext)
   
 
   const [showTimer,setShowTimer] = useState(false)
@@ -33,16 +33,23 @@ function Interface() {
       sessionStorage.setItem("showInterfaceHelpBot", true)
     }
 
-    setInterval(() => {
+    let timer = setInterval(() => {
       if(timestamp){
-        let value = Math.round((1200000 - (Date.now() - timestamp))/1000)
-        if(value > 60 ){
-          let minutes = Math.floor(value / 60)
-          let secondes = value % 60
-          setShowTimer(`${minutes}:${secondes}`)
-          setUpdate({})
+        let value = Math.round(((30 * 60000) - (Date.now() - timestamp))/1000)
+        if(value > 0){
+          if(value > 60 ){
+            let minutes = Math.floor(value / 60)
+            let secondes = value % 60
+            setShowTimer(`${minutes}:${secondes}`)
+            setUpdate({})
+          }else{
+            setShowTimer(value)
+            setUpdate({})
+          }
         }else{
-          setShowTimer(value)
+          clearInterval(timer)
+          setLooseGame(true)
+          setShowedApp(false)
           setUpdate({})
         }
 
@@ -59,8 +66,28 @@ function Interface() {
     setShowNotif(false)
   }
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if(event.key == "Enter"){
+        if(looseGame){
+          resetGame()
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+  })
+
   return (
     <div className="relative w-4/5 h-4/5 rounded-lg bg-no-repeat bg-[url(./assets/ubuntu-background.png)] bg-cover bg-bottom top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+
+        {looseGame &&
+          <div className="w-full h-full bg-black z-20 rounded-lg">
+            <h1 className="mt-2 ml-4">Temps écoulé....</h1>
+            <h1 className="mt-2 ml-4">press enter to restart</h1>
+          </div>
+        }
+
 
         <div className='bg-[#181818] absolute top-0 w-full h-8 rounded-t-lg'>
             <div className='absolute top-[2px] left-1/2 -translate-x-1/2'>{showTimer}</div>
@@ -115,7 +142,7 @@ function Interface() {
             <h1 className="text-black mb-4">Parfait ton utilisateur est crée {username} !</h1>
             </div>
             <div className="bg-white w-full mb-6 rounded-lg p-4">
-            <h1 className="text-black mb-4">Nous avons reçu un notification d'intrusion sur vison !<br/>Tu avais verouiller le logiciel,<br/>cherche dans tes fichiers si tu as laisser<br/>les instructions pour le déverouiller !</h1>
+            <h1 className="text-black mb-4">Nous avons reçu un notification d'intrusion sur vison !<br/>Tu as très peu de temps pour neutraliser l'intrusion !<br/>Tu peux voir ton temps en haut de ton écran.<br/>Tu avais verouillé le logiciel,<br/>cherche dans tes fichiers si tu as laissé<br/>les instructions pour le déverouiller !</h1>
                 <button className='text-black absolute right-2 -translate-y-1/2' onClick={hideBot}>Fermer</button>
             </div>
             <img src="./src/assets/robot.png" alt="robot" />
