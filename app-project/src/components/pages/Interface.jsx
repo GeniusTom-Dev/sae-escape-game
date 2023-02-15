@@ -9,13 +9,12 @@ import Vision from "../Vision"
 
 function Interface() {
 
-  const {username,showedApp, setShowedApp,showedIcon,showIntructionBot,setShowIntructionBot} = useContext(UserContext)
+  const {username,showedApp, setShowedApp,showedIcon,showIntructionBot,setShowIntructionBot,timestamp,showNotif,setShowNotif,showHelpBot,setShowHelpBot} = useContext(UserContext)
   
-  const [showHelpBot,setShowHelpBot] = useState(false)
 
-  let date = new Date()
-  let timestamp = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()} : ${date.getMinutes() < 10 ? `0${date.getMinutes()}`: date.getMinutes()}`
-  
+  const [showTimer,setShowTimer] = useState(false)
+  const [update,setUpdate] = useState(false)
+
   const showApp = (e) => {
     if(!e.target.dataset.app_name){
       if(e.target.parentElement.dataset.app_name){
@@ -29,11 +28,26 @@ function Interface() {
   }
 
   useEffect(() => {
-    console.log(sessionStorage.getItem("showInterfaceHelpBot"))
     if(!sessionStorage.getItem("showInterfaceHelpBot")){
       setShowHelpBot(true)
       sessionStorage.setItem("showInterfaceHelpBot", true)
     }
+
+    setInterval(() => {
+      if(timestamp){
+        let value = Math.round((1200000 - (Date.now() - timestamp))/1000)
+        if(value > 60 ){
+          let minutes = Math.floor(value / 60)
+          let secondes = value % 60
+          setShowTimer(`${minutes}:${secondes}`)
+          setUpdate({})
+        }else{
+          setShowTimer(value)
+          setUpdate({})
+        }
+
+      }
+    }, 1000)
   })
 
   const hideBot = () => {
@@ -41,11 +55,15 @@ function Interface() {
     setShowIntructionBot(false)
   }
 
+  const hideNotif = () => {
+    setShowNotif(false)
+  }
+
   return (
     <div className="relative w-4/5 h-4/5 rounded-lg bg-no-repeat bg-[url(./assets/ubuntu-background.png)] bg-cover bg-bottom top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
 
         <div className='bg-[#181818] absolute top-0 w-full h-8 rounded-t-lg'>
-            <div className='absolute top-[2px] left-1/2 -translate-x-1/2'>{timestamp}</div>
+            <div className='absolute top-[2px] left-1/2 -translate-x-1/2'>{showTimer}</div>
             <div className='absolute right-4 top-2 w-16 flex justify-between items-center'>
                 <img src="./src/assets/icons/wifi.svg" alt="battery" className='w-4'/>
                 <img src="./src/assets/icons/volume.svg" alt="battery" className='w-4'/>
@@ -94,10 +112,21 @@ function Interface() {
         {showIntructionBot &&
           <div className="absolute bottom-0 left-4  flex flex-col items-center">
             <div className="bg-white w-full mb-6 rounded-lg p-4">
-            <h1 className="text-black mb-4">Parfait ton utilisateur est crée {username} !<br/>Cherche dans tes fichiers si tu n'a pas laisser d'indication<br/>sur la démarche à suivre pour retrouver ton mot de passe.</h1>
+            <h1 className="text-black mb-4">Parfait ton utilisateur est crée {username} !</h1>
+            </div>
+            <div className="bg-white w-full mb-6 rounded-lg p-4">
+            <h1 className="text-black mb-4">Nous avons reçu un notification d'intrusion sur vison !<br/>Tu avais verouiller le logiciel,<br/>cherche dans tes fichiers si tu as laisser<br/>les instructions pour le déverouiller !</h1>
                 <button className='text-black absolute right-2 -translate-y-1/2' onClick={hideBot}>Fermer</button>
             </div>
             <img src="./src/assets/robot.png" alt="robot" />
+          </div>
+        }
+
+        {showNotif &&
+          <div className="bg-[#292929] w-1/3 h-[10%] flex justify-around items-center absolute top-10 right-4 p-2 rounded-lg">
+            <img src="./src/assets/iconsSoftware/oeil.png" alt="vison icon" className="h-4/5"/>
+            <h1 className="text-sm w-3/5">Intrusion detecter ! Ouvrez vison pour la neutraliser !</h1>
+            <img src="./src/assets/icons/cross.svg" alt="cross" className="h-4/5 cursor-pointer" onClick={hideNotif}/>
           </div>
         }
 

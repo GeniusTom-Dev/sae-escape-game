@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { commands } from "../constants";
+import { instrcutionsText } from "../constants";
 
 export const UserContext = createContext()
 
@@ -8,12 +9,15 @@ export function UserContextProvider(props){
     const [username, setUsername] = useState("root")
     const [currentFolder, setCurrentFolder] = useState("~")
     const [showedIcon, setShowedIcon] = useState(["terminal.png","chrome.png"])
+    const [timestamp, setTimestamp] = useState()
 
     const [modalState, setModalState] = useState()
 
     const [showedApp, setShowedApp] = useState("")
 
     const [showIntructionBot,setShowIntructionBot] = useState(false)
+    const [showHelpBot,setShowHelpBot] = useState(false)
+    const [showNotif,setShowNotif] = useState(false)
 
     const [lockInstructionFile, setLockInstructionFile] = useState(true)
 
@@ -52,6 +56,9 @@ export function UserContextProvider(props){
     const closeWindow = () => {
         setShowedApp(false)
     }
+
+    // Vison
+    const [visionConnection,setVisionConnections] = useState(true)
 
     const addInfo = (command,returnText) => {
         let info
@@ -162,7 +169,7 @@ export function UserContextProvider(props){
                 if(lockInstructionFile){
                     addInfo(command, <div><p>Fichier Verouiller</p></div>)
                 }else{
-                    addInfo(command, <div><p>Content instructions</p></div>)
+                    addInfo(command, instrcutionsText)
                 }
                 
             }else{
@@ -256,7 +263,10 @@ export function UserContextProvider(props){
         }
         if(username == "root"){
             setUsername(name[1])
+            setShowHelpBot(false)
             setShowIntructionBot(true)
+            setShowNotif(true)
+            setTimestamp( Date.now())
             addInfo(command, <div><p>User create with name: {name[1]}</p></div>)
         }else{
             addInfo(command, <div><p>User Already Create</p></div>)
@@ -358,7 +368,8 @@ export function UserContextProvider(props){
          setShowedApp, closeWindow,actionCommand,showData,lockInstructionFile, setLockInstructionFile,
           currentFolder, showedIcon,progressBar,setProgressBar,questionIndex, setQuestionIndex,quizError, setQuizError,
           fingerprintIndex,setFingerprintIndex,fingerprintList,setFingerprintList,gameState, setGameState, listClicked, setListClicked,
-          nameExtractFile, showIntructionBot,setShowIntructionBot}}>
+          nameExtractFile, showIntructionBot,setShowIntructionBot,timestamp, showNotif,setShowNotif,showHelpBot,setShowHelpBot,
+          visionConnection,setVisionConnections}}>
             {props.children}
         </UserContext.Provider>
     )

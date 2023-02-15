@@ -290,3 +290,15 @@ export const rigthSide = [
         desc: <p className="text-black">17 septembre 1991</p>
     },
 ]
+
+
+export const instrcutionsText = <div>
+    <h1 className="mt-4">Intructions pour vous guidez lors de votre aventure :</h1>
+    <p className="mt-4 ml-4">
+    Comme dit précédemment avec la commande <code className='text-red-700'>help</code> vous pourrez voir la liste des commandes
+    disponibles lors de votre aventure, toutes les commandes vous seront utiles donc si vous ne savez pas quoi faire, découvrez les !
+    Si l'une vous est inconnu, avec la commande <code className='text-red-700'>man</code> vous pouvez en voir son utilisation avec
+    son synopsis et et possible exemple. Des enigmes vous sont disponible dans vos fichiers, il vous suffit de fouiller l'ordinateur !
+    Au fur et à mesure du temps des indices vous seront donnés si vous bloquer.
+    </p>
+</div>
