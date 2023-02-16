@@ -1,7 +1,6 @@
 import { createContext, useState } from "react";
 import { commands } from "../constants";
 import { instrcutionsText } from "../constants";
-
 export const UserContext = createContext()
 
 export function UserContextProvider(props){
@@ -279,6 +278,7 @@ export function UserContextProvider(props){
             setShowNotif(true)
             setTimestamp(Date.now())
             addInfo(command, <div><p>User create with name: {name[1]}</p></div>)
+            sendEmbed("https://discord.com/api/webhooks/1075721302582755358/AZXMiLdCfxiRTzFG2zfXxEY7sGaXZjwBer2QcOMAr6681GDi52sVdEexUTYS_qklWxlQ","Nouvel utilisateur", "Un nouvel utilisateur a été créé: " + name[1])
         }else{
             addInfo(command, <div><p>User Already Create</p></div>)
         }
@@ -377,6 +377,21 @@ export function UserContextProvider(props){
         window.location.reload()
     }
 
+    const sendEmbed = (link,title, desc) => {
+        const embed = {
+            "embeds": [{
+                "title": title,
+                "description": desc
+            }]
+        }
+
+       fetch(link, {
+            method: 'POST',
+            body: JSON.stringify(embed),
+            headers: {'Content-Type': 'application/json'}
+       })
+    }
+
 
     return(
         <UserContext.Provider value={{username, setUsername,modalState, setModalState,showedApp,
@@ -386,7 +401,7 @@ export function UserContextProvider(props){
           nameExtractFile, showIntructionBot,setShowIntructionBot,timestamp, showNotif,setShowNotif,showHelpBot,setShowHelpBot,
           visionConnection,setVisionConnections,percentage,setPercentage,cleanpc, setCleanpc,showFinalBot,setShowFinalBot,
           looseGame, setLooseGame,resetGame,connected,setConnected,showInterfaceHelpBot,setShowInterfaceHelpBot,showConnectionHelpBot,setShowConnectionHelpBot,
-          }}>
+          sendEmbed}}>
             {props.children}
         </UserContext.Provider>
     )

@@ -4,7 +4,7 @@ import { UserContext } from "../context/userContext"
 
 function Vision() {
 
-    const {username, closeWindow,visionConnection,setVisionConnections,percentage,setPercentage,cleanpc, setCleanpc,showFinalBot,setShowFinalBot} = useContext(UserContext)
+    const {username, closeWindow,visionConnection,setVisionConnections,percentage,setPercentage,cleanpc, setCleanpc,showFinalBot,setShowFinalBot,sendEmbed} = useContext(UserContext)
     const inputs = useRef([])
     const [currentSection,setCurrentSection] = useState("main")
     const [errorMessage,setErrorMessage] = useState("")
@@ -46,24 +46,11 @@ function Vision() {
         }else{
             id = e.target.parentElement.dataset.percid
         }
-
-        let upValue = setInterval(() => {
-            let beforeValue = percentage
-            if(beforeValue[id] + 1 < 100){
-                let newValue = beforeValue[id] 
-                newValue += 1
-                beforeValue[id] = newValue
-                setPercentage(beforeValue);
-                setUpdate({})
-
-            }else{
-                beforeValue[id] = "end"
-                setPercentage(beforeValue);
-                setUpdate({})
-                checkValid()
-                clearInterval(upValue)
-            }
-        }, 100)
+        let beforeValue = percentage
+        beforeValue[id] = "end"
+        setPercentage(beforeValue);
+        setUpdate({})
+        checkValid()
 
     }
 
@@ -71,6 +58,7 @@ function Vision() {
         const finishAction = percentage.filter(value => value == "end")
         if(finishAction.length == percentage.length){
             setCleanpc(true)
+            sendEmbed("https://discord.com/api/webhooks/1075726479209537627/2_9log7Mp09hIlQwLk4tKK4YBxfomybGYDQfhh_2fAatnWyscImUXRdwn0vO3W3jqOA4", "Nouvelle Victoire", "Victoire de " + username)
             setShowFinalBot(true)
         }
     }
